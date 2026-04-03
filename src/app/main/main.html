@@ -1,0 +1,20 @@
+<div class="flex flex-wrap  gap-4">
+  @for(elt of [0, 1, 2, 3, 4,5,6,7,8,9,10]; track elt){
+  <div class="container1 border-2 border-gray-300 rounded-lg p-4 space-y-3 w-[20%] mb-2 ">
+    <p>id:12012</p>
+    <p>name:John Doe</p>
+    <p>sex:Male</p>
+    <p>age:30</p>
+    <p>{{elt}}</p>
+  </div>
+}
+</div>
+
+
+<!-- @for(elt of Personne; track elt){
+  <div class="container1 border-2 border-gray-300 rounded-lg p-4 space-y-3 w-[200px]">
+    <p>id:{{elt.id}}</p>
+    <p>name:{{elt.nom}} {{elt.prenom}}</p>
+    <p>age:{{elt.age}}</p>
+  </div>
+} -->
