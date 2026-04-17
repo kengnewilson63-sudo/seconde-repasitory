@@ -1,4 +1,4 @@
-<header class="mb-4">
+<!-- <header class="mb-4">
     <nav class="flex items-center  justify-between p-4 bg-gray-800 text-white ">
         <h1  class="text-xl font-bold cursor-pointer" routerLink="/">MonSite</h1>
         <ul class="justify-between items-center  p-5 flex gap-4">
@@ -8,4 +8,24 @@
             <li class="cursor-pointer" routerLink="/contact">Contact</li>
         </ul> 
     </nav>
-</header>
+</header> -->
+
+    <nav class="flex items-center  justify-between p-4 bg-gray-800 text-white ">
+        <p class="">logo</p>
+        <ul class="flex items-center  p-5 gap-4  justify-between w-1/2">
+          <li><a href="#">home</a>  </li>
+            <li><a href="#">service</a></li>
+            <app-bouton [name]="'click me'"></app-bouton>
+        
+        </ul>
+        <app-output (alike)="affichemerci()" 
+        (alike2)="  metttreajour($event)" 
+        >        </app-output>
+
+        @if(merciVisible){
+            <p>merci pour votre like</p>
+        }
+        <p>Total likes: {{ totallike }}</p>
+    </nav>
+    
+  

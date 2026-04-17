@@ -1,0 +1,110 @@
+
+<!-- ─── playlist.component.html ─────────────────────────── -->
+
+<div class="playlist-wrapper">
+
+  <h1 class="playlist-title">Ma Playlist</h1>
+
+  <!-- @for : une carte par vidéo ──────────────────────────── -->
+  @for (v of videos; track v.id) {
+
+    <!-- ngClass 1 : la carte devient bleue si estActive -->
+    <div
+      class="video-card"
+      [ngClass]="{ 'card-active': v.estActive }"
+      (click)="selectionnerVideo(v.id)"
+    >
+
+      <!-- LIGNE 1 : titre + badge qualité ──────────────────── -->
+      <div class="card-row">
+
+        <!-- ngClass 2 : titre en gras si favori -->
+        <span
+          class="video-titre"
+          [ngClass]="{ 'titre-favori': v.estFavori }"
+        >{{ v.titre }}</span>
+
+        <!-- ngClass 3 : badge qualité coloré selon v.qualite -->
+        <span
+          class="badge"
+          [ngClass]="{
+            'badge-gray'  : v.qualite === 'SD',
+            'badge-green' : v.qualite === 'HD',
+            'badge-blue'  : v.qualite === '4K'
+          }"
+        >{{ v.qualite }}</span>
+
+      </div>
+
+
+      <!-- LIGNE 2 : barre de progression (ngStyle) ─────────── -->
+      <div class="progress-track">
+        <div
+          class="progress-fill"
+          [ngStyle]="{
+            'width'            : v.progression + '%',
+            'background-color' : getCouleurBarre(v.progression)
+          }"
+        ></div>
+      </div>
+
+
+      <!-- LIGNE 3 : statut + durée ──────────────────────────── -->
+      <div class="card-meta">
+
+        <!-- @if/@else if/@else : message selon statutLecture -->
+        @if (v.statutLecture === 'lecture') {
+          <span class="statut statut-vert">En cours de lecture</span>
+        } @else if (v.statutLecture === 'pause') {
+          <span class="statut statut-orange">En pause</span>
+        } @else {
+          <span class="statut statut-gris">Arrêté</span>
+        }
+
+        <span class="video-duree">{{ v.duree }}</span>
+      </div>
+
+
+      <!-- LIGNE 4 : boutons d'action ────────────────────────── -->
+      <div class="card-actions">
+
+        <!-- @if favori : badge affiché seulement si estFavori -->
+        @if (v.estFavori) {
+          <span class="badge-favori">Favori</span>
+        }
+
+        <!-- Bouton favori toujours visible, texte change selon état -->
+        <button
+          class="btn"
+          (click)="basculerFavori(v.id); $event.stopPropagation()"
+        >
+          @if (v.estFavori) { Retirer des favoris }
+          @else { Ajouter aux favoris }
+        </button>
+
+        <!-- Bouton lecture/pause/reprendre selon le statut -->
+        @if (v.statutLecture === 'arret') {
+          <button class="btn btn-primary"
+            (click)="changerStatut(v.id, 'lecture'); $event.stopPropagation()"
+          >Lire</button>
+
+        } @else if (v.statutLecture === 'lecture') {
+          <button class="btn btn-pause"
+            (click)="changerStatut(v.id, 'pause'); $event.stopPropagation()"
+          >Pause</button>
+
+        } @else {
+          <button class="btn btn-primary"
+            (click)="changerStatut(v.id, 'lecture'); $event.stopPropagation()"
+          >Reprendre</button>
+        }
+
+      </div>
+
+    </div>
+    <!-- fin video-card -->
+
+  }
+  <!-- fin @for -->
+
+</div>

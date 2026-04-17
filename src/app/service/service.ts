@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-service',
@@ -6,4 +6,9 @@ import { Component } from '@angular/core';
   templateUrl: './service.html',
   styleUrl: './service.css',
 })
-export class Service {}
+export class Service {
+
+    name=input<string>();
+  prenom=input<string>();
+  age=input<number>();
+}
